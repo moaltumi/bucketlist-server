@@ -41,8 +41,9 @@ app.get('/bucketlist/:id', (req, res) => {
 
 
 app.post('/bucketlist', (req, res) => {
-    const bucketlist = fs.readFileSync('./data/bucketlist.json', 'utf8');
+    let bucketlist = fs.readFileSync('./data/bucketlist.json', 'utf8');
     bucketlist = JSON.parse(bucketlist);
+
     const newBucketlist = {
         id: uuivd4(),
         todo: req.body.todo,
@@ -52,7 +53,7 @@ app.post('/bucketlist', (req, res) => {
      };
 
     bucketlist.push(newBucketlist);
-    fs.writeFileSync('./data/bucketlist.json', JSON.stringify(bucketlistsArray));
+    fs.writeFileSync('./data/bucketlist.json', JSON.stringify(bucketlist));
     res.json(bucketlist);
 
 });
